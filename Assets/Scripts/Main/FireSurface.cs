@@ -32,24 +32,24 @@ namespace Main
                 fallbackFireVisual = CreateFallbackVisual("Fire Visual", PrimitiveType.Sphere, new Color(1f, 0.24f, 0.02f, 1f), Vector3.zero, Vector3.one * 0.35f);
             }
 
-            if (smokeEffectPrefab != null)
-            {
-                ParticleSystem smokeEffect = Instantiate(smokeEffectPrefab, transform);
-                smokeEffect.transform.localPosition = Vector3.up * 0.1f;
-                smokeEffect.transform.localRotation = Quaternion.identity;
-                smokeEffect.Play();
+            // if (smokeEffectPrefab != null)
+            // {
+            //     ParticleSystem smokeEffect = Instantiate(smokeEffectPrefab, transform);
+            //     smokeEffect.transform.localPosition = Vector3.up * 0.1f;
+            //     smokeEffect.transform.localRotation = Quaternion.identity;
+            //     smokeEffect.Play();
 
-                smokeCloud = smokeEffect.gameObject.GetComponent<SmokeCloud>();
-                if (smokeCloud == null)
-                {
-                    smokeCloud = smokeEffect.gameObject.AddComponent<SmokeCloud>();
-                }
-            }
-            else
-            {
-                GameObject smokeVisual = CreateFallbackVisual("Smoke Visual", PrimitiveType.Sphere, new Color(0.25f, 0.25f, 0.25f, 1f), Vector3.up * 0.25f, Vector3.one * 0.55f);
-                smokeCloud = smokeVisual.AddComponent<SmokeCloud>();
-            }
+            //     smokeCloud = smokeEffect.gameObject.GetComponent<SmokeCloud>();
+            //     if (smokeCloud == null)
+            //     {
+            //         smokeCloud = smokeEffect.gameObject.AddComponent<SmokeCloud>();
+            //     }
+            // }
+            // else
+            // {
+            //     GameObject smokeVisual = CreateFallbackVisual("Smoke Visual", PrimitiveType.Sphere, new Color(0.25f, 0.25f, 0.25f, 1f), Vector3.up * 0.25f, Vector3.one * 0.55f);
+            //     smokeCloud = smokeVisual.AddComponent<SmokeCloud>();
+            // }
 
             Destroy(gameObject, lifeTime);
         }
@@ -73,10 +73,10 @@ namespace Main
                 fallbackFireVisual.SetActive(false);
             }
 
-            if (smokeCloud != null)
-            {
-                smokeCloud.Disperse();
-            }
+            // if (smokeCloud != null)
+            // {
+            //     smokeCloud.Disperse();
+            // }
 
             Destroy(gameObject, 1.5f);
         }

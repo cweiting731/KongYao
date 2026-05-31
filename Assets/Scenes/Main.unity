@@ -7501,6 +7501,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9167726911709425407}
   m_Mesh: {fileID: 4333630108083154938, guid: 479d627c07ecbfe49a4be981663e6aed, type: 3}
+--- !u!1001 &1133108437871419619
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4122462108969092943, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.36445
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122462108969092943, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122462108969092943, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.75837
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122462108969092943, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122462108969092943, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122462108969092943, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122462108969092943, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122462108969092943, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122462108969092943, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122462108969092943, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680819728307443525, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_Name
+      value: Fire Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680819728307443525, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
 --- !u!1 &1355375278495446782
 GameObject:
   m_ObjectHideFlags: 0
@@ -11880,14 +11941,14 @@ MonoBehaviour:
     projectileSpeed: 0
   magicNameText: {fileID: 8379878754838412660}
   castPoint: {fileID: 418838467}
-  defaultProjectileSpeed: 8
+  defaultProjectileSpeed: 1
   spawnForwardOffset: 0.35
   castCooldown: 0.25
-  defaultFirePrefab: {fileID: 0}
+  defaultFirePrefab: {fileID: 6680819728307443525, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
   defaultWaterPrefab: {fileID: 0}
   defaultWindPrefab: {fileID: 0}
   defaultEarthPrefab: {fileID: 0}
-  fireBurningEffectPrefab: {fileID: 0}
+  fireBurningEffectPrefab: {fileID: 2422527491627279714, guid: 2c22e08841aeec046a2f6137e4636a40, type: 3}
   smokeEffectPrefab: {fileID: 0}
   currentIndex: 0
   showMagicPlane: 0
@@ -13340,3 +13401,4 @@ SceneRoots:
   - {fileID: 1762955777}
   - {fileID: 418838467}
   - {fileID: 1929746271}
+  - {fileID: 1133108437871419619}

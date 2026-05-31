@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3024789050051588559
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
+  version: 10
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -8,21 +21,49 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_VFX_Fire_01
-  m_Shader: {fileID: 4800000, guid: b8a99704b1204314e816971e63a2a521, type: 3}
-  m_ValidKeywords: []
+  m_Shader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _ADD_PRECOMPUTED_VELOCITY
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     MotionVector: User
+    RenderType: Transparent
   disabledShaderPasses:
   - DistortionVectors
   - TransparentBackface
+  - DepthOnly
+  - SHADOWCASTER
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 48dc7bc18268b924c8348d314decc5da, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorGradientMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortionMaskTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 48dc7bc18268b924c8348d314decc5da, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MaskMoveTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -59,6 +100,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: e98f402880ccea64fbeab50c8ad0b82a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -78,29 +127,41 @@ Material:
     m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 1
+    - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 1
     - _AlphaSrcBlend: 1
+    - _AlphaToMask: 0
+    - _AlphaWrite: 0
+    - _Blend: 2
     - _BlendMode: 1
+    - _BlendOp: 0
     - _CamOffSet: 0
     - _CameraOffset: 0
+    - _Cull: 2
     - _Cull1: 2
     - _CullMode: 2
     - _CullModeForward: 2
+    - _Cutoff: 0.5
     - _DepthFade: 1
     - _Dissolve: 0
     - _Distortion: 1.5
+    - _DistortionAmount: 1
     - _DistortionEnable: 0
     - _DistortionIntensity: 0
     - _DistortionMask: 0
+    - _DistortionMaskIntensity: 1
     - _DistortionOnly: 0
+    - _DistortionStrength: 7
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
     - _Dst1: 10
     - _DstBlend: 1
+    - _DstBlendAlpha: 1
     - _EmissionIntensity: 33
     - _Emissive: 40
+    - _EmissiveIntensity: 1
     - _Emissive_Amount: 10
     - _EnableFogOnTransparent: 1
     - _Global_Speed: 1
@@ -116,6 +177,7 @@ Material:
     - _Mask_Power: 1
     - _Mask_Speed: 0
     - _NoisesMultiply: 1
+    - _NoisesOpacityBoost: 1
     - _NoisesPower: 1
     - _Noises_Multiply: 1
     - _Noises_Power: 1
@@ -127,11 +189,14 @@ Material:
     - _Power: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _ReceivesSSR: 0
     - _RenderQueueType: 4
     - _RequireSplitLighting: 0
+    - _SampleGI: 0
     - _Src1: 5
-    - _SrcBlend: 1
+    - _SrcBlend: 5
+    - _SrcBlendAlpha: 1
     - _StencilRef: 0
     - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 4
@@ -142,6 +207,7 @@ Material:
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 40
+    - _Surface: 1
     - _SurfaceType: 1
     - _TessEdgeLength: 16
     - _TessMax: 25
@@ -155,6 +221,8 @@ Material:
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
     - _WindSpeed: 1
+    - _WireThickness: 100
+    - _XRMotionVectorsPass: 1
     - _ZTest1: 2
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
@@ -163,7 +231,13 @@ Material:
     - _ZWrite1: 0
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - White: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.87169814, g: 0.49475986, b: 0.01809183, a: 1}
+    - _Color: {r: 0.87169814, g: 0.4947598, b: 0.01809183, a: 1}
+    - _ColorBottom: {r: 1, g: 0.36666667, b: 0, a: 0}
+    - _ColorTop: {r: 1, g: 0.6666667, b: 0, a: 0}
+    - _DissolveUVP: {r: 0, g: 0, b: 0, a: 0}
+    - _DissolveUVS: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _MaskMoveScale: {r: 1, g: 1, b: 0, a: 0}
@@ -184,4 +258,6 @@ Material:
     - _Noise_01_Speed: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _Noise_02_Scale: {r: 1, g: 1, b: 0, a: 0}
     - _Noise_02_Speed: {r: 0, g: 0, b: 0, a: 0}
+    - _TextureChannel: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
