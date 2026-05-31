@@ -690,6 +690,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 920657818315619146}
+        m_TargetAssemblyTypeName: BrickSpawner, Assembly-CSharp
+        m_MethodName: SpawnBrickInFrontOfUser
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &530908713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3907679614406300944, guid: 13c990b8270c70b4c9f196019286028c, type: 3}
@@ -6923,6 +6935,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 920657818315619144}
+  - component: {fileID: 920657818315619146}
   m_Layer: 4
   m_Name: ColorButton
   m_TagString: Untagged
@@ -6930,6 +6943,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &920657818315619146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920657818315619145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc4e65e140e9354ea42bc2eb325cd82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BrickSpawner
+  brickPrefab: {fileID: 5856938607591454276, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+  centerEyeAnchor: {fileID: 1431970611}
+  minSize: 0.2
+  maxSize: 1.2
 --- !u!1001 &951344332324190534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11173,6 +11202,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5087699919899437830}
   m_Mesh: {fileID: -143731093039007492, guid: 479d627c07ecbfe49a4be981663e6aed, type: 3}
+--- !u!1001 &3972463797402115725
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5856938607591454276, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_Name
+      value: Brick
+      objectReference: {fileID: 0}
+    - target: {fileID: 5856938607591454276, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451852838076744250, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451852838076744250, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451852838076744250, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451852838076744250, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451852838076744250, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451852838076744250, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451852838076744250, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451852838076744250, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451852838076744250, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451852838076744250, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
 --- !u!1001 &4013652694153984570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13402,3 +13492,4 @@ SceneRoots:
   - {fileID: 418838467}
   - {fileID: 1929746271}
   - {fileID: 1133108437871419619}
+  - {fileID: 3972463797402115725}
