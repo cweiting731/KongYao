@@ -6,9 +6,11 @@ namespace Main
     {
         [SerializeField] private float triggerRadius = 0.7f;
         [SerializeField] private float destroyDelay = 1.5f;
+        [SerializeField] private float lingeringLifeTime = 25f;
 
         private ParticleSystem[] particles;
         private Renderer[] renderers;
+        private FireSurface attachedFireSurface;
         private bool dispersed;
 
         private void Awake()
@@ -29,6 +31,18 @@ namespace Main
             }
         }
 
+        public void Initialize(FireSurface fireSurface, float lingerDuration)
+        {
+            attachedFireSurface = fireSurface;
+            lingeringLifeTime = lingerDuration;
+        }
+
+        public void DetachFromFire()
+        {
+            attachedFireSurface = null;
+            Destroy(gameObject, lingeringLifeTime);
+        }
+
         public void Disperse()
         {
             if (dispersed)
@@ -36,7 +50,15 @@ namespace Main
                 return;
             }
 
+            if (attachedFireSurface != null && attachedFireSurface.IsBurning)
+            {
+                Debug.Log("[SmokeCloud] Wind hit smoke attached to burning fire. Intensifying fire instead of dispersing smoke.", this);
+                attachedFireSurface.IntensifyFire();
+                return;
+            }
+
             dispersed = true;
+            Debug.Log("[SmokeCloud] Smoke dispersed.", this);
 
             if (particles == null || particles.Length == 0)
             {

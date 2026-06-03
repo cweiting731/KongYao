@@ -9,8 +9,8 @@ namespace Main
         [SerializeField] private float lifeTime = 5f;
         [SerializeField] private float hitRadius = 0.12f;
         [SerializeField] private float impactRadius = 1.5f;
-        [SerializeField] private float attachedFireLifeTime = 12f;
         [SerializeField] private float windSmokeDisperseRadius = 2.5f;
+        [SerializeField] private float earthBrickSpawnHeight = 3f;
         [SerializeField] private float collisionDelay = 0.08f;
         [SerializeField] private LayerMask impactLayers = ~0;
 
@@ -19,7 +19,10 @@ namespace Main
         private float moveSpeed;
         private float canHitTime;
         private ParticleSystem fireBurningEffectPrefab;
+        private ParticleSystem mediumFireBurningEffectPrefab;
+        private ParticleSystem largeFireBurningEffectPrefab;
         private ParticleSystem smokeEffectPrefab;
+        private GameObject brickPrefab;
         private bool hasImpacted;
 
         private void Awake()
@@ -83,14 +86,20 @@ namespace Main
             Vector3 direction,
             float speed,
             ParticleSystem fireEffectPrefab,
-            ParticleSystem smokePrefab)
+            ParticleSystem mediumFireEffectPrefab,
+            ParticleSystem largeFireEffectPrefab,
+            ParticleSystem smokePrefab,
+            GameObject brickSpawnPrefab)
         {
             magicType = type;
             moveDirection = direction.sqrMagnitude > 0f ? direction.normalized : transform.forward;
             moveSpeed = speed;
             canHitTime = Time.time + collisionDelay;
             fireBurningEffectPrefab = fireEffectPrefab;
+            mediumFireBurningEffectPrefab = mediumFireEffectPrefab;
+            largeFireBurningEffectPrefab = largeFireEffectPrefab;
             smokeEffectPrefab = smokePrefab;
+            brickPrefab = brickSpawnPrefab;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -112,7 +121,17 @@ namespace Main
 
             if (magicType == MagicType.Wind && smokeCloud != null)
             {
+                Debug.Log($"[MagicProjectile] Wind projectile touched smoke: {smokeCloud.name}", this);
                 smokeCloud.Disperse();
+                Destroy(gameObject);
+                return;
+            }
+
+            if (magicType == MagicType.Wind && fireSurface != null)
+            {
+                Debug.Log($"[MagicProjectile] Wind projectile touched fire directly: {fireSurface.name}", this);
+                fireSurface.IntensifyFire();
+                Destroy(gameObject);
             }
         }
 
@@ -132,6 +151,7 @@ namespace Main
                     DisperseSmoke(point);
                     break;
                 case MagicType.Earth:
+                    SpawnBrick(point);
                     break;
             }
 
@@ -147,7 +167,7 @@ namespace Main
             fireObject.transform.SetParent(hitTransform, true);
 
             FireSurface fireSurface = fireObject.AddComponent<FireSurface>();
-            fireSurface.Initialize(attachedFireLifeTime, fireBurningEffectPrefab, smokeEffectPrefab);
+            fireSurface.Initialize(fireBurningEffectPrefab, mediumFireBurningEffectPrefab, largeFireBurningEffectPrefab, smokeEffectPrefab);
         }
 
         private void ExtinguishFire(Vector3 point)
@@ -163,6 +183,44 @@ namespace Main
             }
         }
 
+        private void SpawnBrick(Vector3 point)
+        {
+            Vector3 spawnPosition = point + Vector3.up * earthBrickSpawnHeight;
+            GameObject brickObject;
+
+            if (brickPrefab != null)
+            {
+                brickObject = Instantiate(brickPrefab, spawnPosition, Random.rotation);
+                float baseScale = Random.Range(0.3f, 0.5f);
+                float randomX = baseScale * Random.Range(1.8f, 2.2f); // 變長 (長度)
+                float randomY = baseScale * Random.Range(0.8f, 1.2f); // 變矮 (高度)
+                float randomZ = baseScale * Random.Range(1.0f, 1.4f); // 變寬 (寬度)
+                brickObject.transform.localScale = new Vector3(randomX, randomY, randomZ);
+            }
+            else
+            {
+                brickObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                brickObject.name = "Brick";
+                brickObject.transform.SetPositionAndRotation(spawnPosition, Random.rotation);
+                brickObject.transform.localScale = new Vector3(0.9f, 0.35f, 0.55f);
+            }
+
+            if (brickObject.GetComponentInChildren<Collider>() == null)
+            {
+                brickObject.AddComponent<BoxCollider>();
+            }
+
+            if (brickObject.GetComponent<Rigidbody>() == null)
+            {
+                brickObject.AddComponent<Rigidbody>();
+            }
+
+            if (brickObject.GetComponent<BrickFireExtinguisher>() == null)
+            {
+                brickObject.AddComponent<BrickFireExtinguisher>();
+            }
+        }
+
         private void DisperseSmoke(Vector3 point)
         {
             Collider[] colliders = Physics.OverlapSphere(point, windSmokeDisperseRadius, impactLayers, QueryTriggerInteraction.Collide);
@@ -171,7 +229,20 @@ namespace Main
                 SmokeCloud smokeCloud = hitCollider.GetComponentInParent<SmokeCloud>();
                 if (smokeCloud != null)
                 {
+                    Debug.Log($"[MagicProjectile] Wind overlap found smoke: {smokeCloud.name}", this);
                     smokeCloud.Disperse();
+                    return;
+                }
+            }
+
+            foreach (Collider hitCollider in colliders)
+            {
+                FireSurface fireSurface = hitCollider.GetComponentInParent<FireSurface>();
+                if (fireSurface != null && fireSurface.IsBurning)
+                {
+                    Debug.Log($"[MagicProjectile] Wind overlap found burning fire directly: {fireSurface.name}", this);
+                    fireSurface.IntensifyFire();
+                    return;
                 }
             }
         }

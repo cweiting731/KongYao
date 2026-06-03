@@ -49,7 +49,10 @@ namespace Main
         [SerializeField] private GameObject defaultWindPrefab;
         [SerializeField] private GameObject defaultEarthPrefab;
         [SerializeField] private ParticleSystem fireBurningEffectPrefab;
+        [SerializeField] private ParticleSystem mediumFireBurningEffectPrefab;
+        [SerializeField] private ParticleSystem largeFireBurningEffectPrefab;
         [SerializeField] private ParticleSystem smokeEffectPrefab;
+        [SerializeField] private GameObject brickPrefab;
 
         [SerializeField] private int currentIndex = 0;
         [SerializeField] private bool showMagicPlane = false;
@@ -82,7 +85,15 @@ namespace Main
             }
 
             float speed = currentState.projectileSpeed > 0f ? currentState.projectileSpeed : defaultProjectileSpeed;
-            projectile.Launch(currentState.magicType, spawnPoint.forward, speed, fireBurningEffectPrefab, smokeEffectPrefab);
+            projectile.Launch(
+                currentState.magicType,
+                spawnPoint.forward,
+                speed,
+                fireBurningEffectPrefab,
+                mediumFireBurningEffectPrefab,
+                largeFireBurningEffectPrefab,
+                smokeEffectPrefab,
+                brickPrefab);
             nextCastTime = Time.time + castCooldown;
         }
 
