@@ -21,13 +21,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_VFX_Fire_01
-  m_Shader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0406db5a14f94604a8c57ccfbc9f3b46, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ADD_PRECOMPUTED_VELOCITY
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _FLIPBOOKBLENDING_OFF
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -48,6 +48,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 48dc7bc18268b924c8348d314decc5da, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ColorGradientMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -57,6 +61,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortionMaskTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -134,11 +142,15 @@ Material:
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
     - _AlphaWrite: 0
-    - _Blend: 2
+    - _Blend: 0
     - _BlendMode: 1
     - _BlendOp: 0
     - _CamOffSet: 0
+    - _CameraFadingEnabled: 0
+    - _CameraFarFadeDistance: 2
+    - _CameraNearFadeDistance: 1
     - _CameraOffset: 0
+    - _ColorMode: 0
     - _Cull: 2
     - _Cull1: 2
     - _CullMode: 2
@@ -148,22 +160,27 @@ Material:
     - _Dissolve: 0
     - _Distortion: 1.5
     - _DistortionAmount: 1
+    - _DistortionBlend: 0.5
     - _DistortionEnable: 0
+    - _DistortionEnabled: 0
     - _DistortionIntensity: 0
     - _DistortionMask: 0
     - _DistortionMaskIntensity: 1
     - _DistortionOnly: 0
     - _DistortionStrength: 7
+    - _DistortionStrengthScaled: 0.1
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
     - _Dst1: 10
-    - _DstBlend: 1
-    - _DstBlendAlpha: 1
+    - _DstBlend: 10
+    - _DstBlendAlpha: 10
     - _EmissionIntensity: 33
     - _Emissive: 40
     - _EmissiveIntensity: 1
     - _Emissive_Amount: 10
     - _EnableFogOnTransparent: 1
+    - _FlipbookBlending: 0
+    - _FlipbookMode: 0
     - _Global_Speed: 1
     - _Intensity: 1
     - _MaskMoveMultiply: 1
@@ -176,6 +193,7 @@ Material:
     - _Mask_Multiply: 1
     - _Mask_Power: 1
     - _Mask_Speed: 0
+    - _Mode: 0
     - _NoisesMultiply: 1
     - _NoisesOpacityBoost: 1
     - _NoisesPower: 1
@@ -194,6 +212,9 @@ Material:
     - _RenderQueueType: 4
     - _RequireSplitLighting: 0
     - _SampleGI: 0
+    - _SoftParticlesEnabled: 0
+    - _SoftParticlesFarFadeDistance: 1
+    - _SoftParticlesNearFadeDistance: 0
     - _Src1: 5
     - _SrcBlend: 5
     - _SrcBlendAlpha: 1
@@ -232,8 +253,10 @@ Material:
     - __dirty: 0
     m_Colors:
     - White: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 0.87169814, g: 0.49475986, b: 0.01809183, a: 1}
-    - _Color: {r: 0.87169814, g: 0.4947598, b: 0.01809183, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColorAddSubDiff: {r: -1, g: 1, b: 0, a: 0}
+    - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorBottom: {r: 1, g: 0.36666667, b: 0, a: 0}
     - _ColorTop: {r: 1, g: 0.6666667, b: 0, a: 0}
     - _DissolveUVP: {r: 0, g: 0, b: 0, a: 0}
@@ -258,6 +281,7 @@ Material:
     - _Noise_01_Speed: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _Noise_02_Scale: {r: 1, g: 1, b: 0, a: 0}
     - _Noise_02_Speed: {r: 0, g: 0, b: 0, a: 0}
+    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _TextureChannel: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
