@@ -40,9 +40,11 @@ namespace Main
 
             if (smokeEffectPrefab != null)
             {
-                ParticleSystem smokeEffect = Instantiate(smokeEffectPrefab, transform);
+                ParticleSystem smokeEffect = Instantiate(smokeEffectPrefab, transform.position + Vector3.up * 0.1f, Quaternion.identity, transform);
                 smokeEffect.transform.localPosition = Vector3.up * 0.1f;
-                smokeEffect.transform.localRotation = Quaternion.identity;
+                smokeEffect.transform.rotation = Quaternion.identity;
+                var smokeMain = smokeEffect.main;
+                smokeMain.simulationSpace = ParticleSystemSimulationSpace.World;
                 smokeEffect.Play();
 
                 smokeCloud = smokeEffect.gameObject.GetComponent<SmokeCloud>();
@@ -146,10 +148,12 @@ namespace Main
 
             if (firePrefab != null)
             {
-                fireEffect = Instantiate(firePrefab, transform);
+                fireEffect = Instantiate(firePrefab, transform.position, Quaternion.identity, transform);
                 fireEffect.transform.localPosition = Vector3.zero;
-                fireEffect.transform.localRotation = Quaternion.identity;
+                fireEffect.transform.rotation = Quaternion.identity;
                 fireEffect.transform.localScale = Vector3.one * stageScale;
+                var fireMain = fireEffect.main;
+                fireMain.simulationSpace = ParticleSystemSimulationSpace.World;
                 fireEffect.Play();
                 Debug.Log(
                     $"[FireSurface] Fire stage changed {GetStageDisplayName(previousStage)} -> {GetStageDisplayName(fireStage)} using prefab '{firePrefab.name}' with scale {stageScale}.",
@@ -216,8 +220,8 @@ namespace Main
             visual.name = objectName;
             visual.transform.SetParent(transform, false);
             visual.transform.localPosition = localPosition;
-            visual.transform.localRotation = Quaternion.identity;
             visual.transform.localScale = localScale;
+            visual.transform.rotation = Quaternion.identity;
 
             Collider visualCollider = visual.GetComponent<Collider>();
             if (visualCollider != null)
