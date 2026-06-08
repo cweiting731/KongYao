@@ -114,24 +114,35 @@ namespace Main
 
             if (magicType == MagicType.Water && fireSurface != null)
             {
+                hasImpacted = true;
                 fireSurface.Extinguish();
                 Destroy(gameObject);
                 return;
             }
 
-            if (magicType == MagicType.Wind && smokeCloud != null)
+            if (magicType == MagicType.Wind)
             {
-                Debug.Log($"[MagicProjectile] Wind projectile touched smoke: {smokeCloud.name}", this);
-                smokeCloud.Disperse();
+                // Ensure wind only affects once
+                hasImpacted = true;
+                if (smokeCloud != null)
+                {
+                    Debug.Log($"[MagicProjectile] Wind projectile touched smoke: {smokeCloud.name}", this);
+                    smokeCloud.Disperse();
+                    Destroy(gameObject);
+                    return;
+                }
+
+                if (fireSurface != null)
+                {
+                    Debug.Log($"[MagicProjectile] Wind projectile touched fire directly: {fireSurface.name}", this);
+                    fireSurface.IntensifyFire();
+                    Destroy(gameObject);
+                    return;
+                }
+
+                // Wind should be cleared after touching any impact-layer object.
                 Destroy(gameObject);
                 return;
-            }
-
-            if (magicType == MagicType.Wind && fireSurface != null)
-            {
-                Debug.Log($"[MagicProjectile] Wind projectile touched fire directly: {fireSurface.name}", this);
-                fireSurface.IntensifyFire();
-                Destroy(gameObject);
             }
         }
 
@@ -191,18 +202,20 @@ namespace Main
             if (brickPrefab != null)
             {
                 brickObject = Instantiate(brickPrefab, spawnPosition, Random.rotation);
-                float baseScale = Random.Range(0.3f, 0.5f);
-                float randomX = baseScale * Random.Range(1.8f, 2.2f); // 變長 (長度)
-                float randomY = baseScale * Random.Range(0.8f, 1.2f); // 變矮 (高度)
-                float randomZ = baseScale * Random.Range(1.0f, 1.4f); // 變寬 (寬度)
-                brickObject.transform.localScale = new Vector3(randomX, randomY, randomZ);
+                // Brick proportions L:W:H ~ 2:1:1, smaller overall
+                float baseSize = Random.Range(0.09f, 0.12f); // base unit
+                float length = baseSize * 2f; // 長度 (x)
+                float width = baseSize * 1f;  // 寬度 (z)
+                float height = baseSize * 1f; // 高度 (y)
+                brickObject.transform.localScale = new Vector3(length, height, width);
             }
             else
             {
                 brickObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 brickObject.name = "Brick";
                 brickObject.transform.SetPositionAndRotation(spawnPosition, Random.rotation);
-                brickObject.transform.localScale = new Vector3(0.9f, 0.35f, 0.55f);
+                // Default fallback dimensions with L:W:H ~= 2:1:1 (meters)
+                brickObject.transform.localScale = new Vector3(0.20f, 0.10f, 0.10f);
             }
 
             if (brickObject.GetComponentInChildren<Collider>() == null)
@@ -230,7 +243,10 @@ namespace Main
                 if (smokeCloud != null)
                 {
                     Debug.Log($"[MagicProjectile] Wind overlap found smoke: {smokeCloud.name}", this);
+                    // Mark impacted so this projectile won't apply additional effects
+                    hasImpacted = true;
                     smokeCloud.Disperse();
+                    Destroy(gameObject);
                     return;
                 }
             }
@@ -241,7 +257,10 @@ namespace Main
                 if (fireSurface != null && fireSurface.IsBurning)
                 {
                     Debug.Log($"[MagicProjectile] Wind overlap found burning fire directly: {fireSurface.name}", this);
+                    // Mark impacted so this projectile won't apply additional effects
+                    hasImpacted = true;
                     fireSurface.IntensifyFire();
+                    Destroy(gameObject);
                     return;
                 }
             }

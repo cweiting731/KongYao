@@ -93,15 +93,10 @@ namespace Main
 
             if (smokeCloud != null)
             {
-                if (removeSmoke)
-                {
-                    smokeCloud.Disperse();
-                }
-                else
-                {
-                    smokeCloud.transform.SetParent(null, true);
-                    smokeCloud.DetachFromFire();
-                }
+                // Do not automatically disperse smoke when fire is extinguished.
+                // Always detach smoke so it can linger for its lingeringLifeTime.
+                smokeCloud.transform.SetParent(null, true);
+                smokeCloud.DetachFromFire();
             }
 
             Destroy(gameObject, 1.5f);

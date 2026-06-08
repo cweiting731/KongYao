@@ -50,12 +50,8 @@ namespace Main
                 return;
             }
 
-            if (attachedFireSurface != null && attachedFireSurface.IsBurning)
-            {
-                Debug.Log("[SmokeCloud] Wind hit smoke attached to burning fire. Intensifying fire instead of dispersing smoke.", this);
-                attachedFireSurface.IntensifyFire();
-                return;
-            }
+            // Do not directly intensify attached fire here; let the wind projectile
+            // decide whether to intensify the fire to avoid double-incrementing.
 
             dispersed = true;
             Debug.Log("[SmokeCloud] Smoke dispersed.", this);

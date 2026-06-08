@@ -696,8 +696,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 920657818315619146}
-        m_TargetAssemblyTypeName: BrickSpawner, Assembly-CSharp
-        m_MethodName: SpawnBrickInFrontOfUser
+        m_TargetAssemblyTypeName: Main.KilnBuilder, Assembly-CSharp
+        m_MethodName: GenerateKilnInFront
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7407,13 +7407,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 920657818315619145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc4e65e140e9354ea42bc2eb325cd82, type: 3}
+  m_Script: {fileID: 11500000, guid: f9b13e293a413124f849ff0cb00ea070, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BrickSpawner
+  m_EditorClassIdentifier: Assembly-CSharp::Main.KilnBuilder
   brickPrefab: {fileID: 5856938607591454276, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
-  centerEyeAnchor: {fileID: 1431970611}
-  minSize: 0.2
-  maxSize: 1.2
+  woodPrefab: {fileID: 0}
+  firePrefab: {fileID: 0}
+  wallLayers: 6
+  innerRadius: 0.9
+  openingAngle: 60
+  capTop: 1
+  brickLength: 0.2
+  brickWidth: 0.1
+  brickHeight: 0.1
+  spawnDistanceInFront: 1
+  floorMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1001 &951344332324190534
 PrefabInstance:
   m_ObjectHideFlags: 0
