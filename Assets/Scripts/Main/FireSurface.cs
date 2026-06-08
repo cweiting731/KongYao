@@ -6,6 +6,8 @@ namespace Main
     {
         [SerializeField] private float triggerRadius = 0.45f;
         [SerializeField] private float smokeLingeringLifeTime = 5f;
+        [SerializeField] private float mediumSmokeLingeringLifeTime = 10f;
+        [SerializeField] private float largeSmokeLingeringLifeTime = 15f;
         [SerializeField] private float smallFireScale = 1f;
         [SerializeField] private float mediumFireScale = 1.6f;
         [SerializeField] private float largeFireScale = 2.4f;
@@ -62,6 +64,7 @@ namespace Main
             if (smokeCloud != null)
             {
                 smokeCloud.Initialize(this, smokeLingeringLifeTime);
+                ApplySmokeLingeringTimeForCurrentFireStage();
             }
         }
 
@@ -117,6 +120,7 @@ namespace Main
             }
 
             SetFireStage(fireStage + 1);
+            ApplySmokeLingeringTimeForCurrentFireStage();
         }
 
         private void SetFireStage(int stage)
@@ -180,6 +184,29 @@ namespace Main
                 default:
                     return smallFireScale;
             }
+        }
+
+        private float GetSmokeLingeringLifeTimeForStage(int stage)
+        {
+            switch (stage)
+            {
+                case 1:
+                    return mediumSmokeLingeringLifeTime;
+                case 2:
+                    return largeSmokeLingeringLifeTime;
+                default:
+                    return smokeLingeringLifeTime;
+            }
+        }
+
+        private void ApplySmokeLingeringTimeForCurrentFireStage()
+        {
+            if (smokeCloud == null)
+            {
+                return;
+            }
+
+            smokeCloud.SetLingeringLifeTime(GetSmokeLingeringLifeTimeForStage(fireStage));
         }
 
         private string GetStageDisplayName(int stage)

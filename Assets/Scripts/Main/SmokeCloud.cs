@@ -37,6 +37,16 @@ namespace Main
             lingeringLifeTime = lingerDuration;
         }
 
+        public void SetLingeringLifeTime(float lingerDuration)
+        {
+            lingeringLifeTime = lingerDuration;
+        }
+
+        public FireSurface GetAttachedFireSurface()
+        {
+            return attachedFireSurface;
+        }
+
         public void DetachFromFire()
         {
             attachedFireSurface = null;

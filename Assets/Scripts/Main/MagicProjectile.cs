@@ -127,7 +127,16 @@ namespace Main
                 if (smokeCloud != null)
                 {
                     Debug.Log($"[MagicProjectile] Wind projectile touched smoke: {smokeCloud.name}", this);
-                    smokeCloud.Disperse();
+                    var attached = smokeCloud.GetAttachedFireSurface();
+                    if (attached != null && attached.IsBurning)
+                    {
+                        // Intensify attached fire instead of dispersing smoke
+                        attached.IntensifyFire();
+                    }
+                    else
+                    {
+                        smokeCloud.Disperse();
+                    }
                     Destroy(gameObject);
                     return;
                 }
@@ -245,7 +254,15 @@ namespace Main
                     Debug.Log($"[MagicProjectile] Wind overlap found smoke: {smokeCloud.name}", this);
                     // Mark impacted so this projectile won't apply additional effects
                     hasImpacted = true;
-                    smokeCloud.Disperse();
+                    var attached = smokeCloud.GetAttachedFireSurface();
+                    if (attached != null && attached.IsBurning)
+                    {
+                        attached.IntensifyFire();
+                    }
+                    else
+                    {
+                        smokeCloud.Disperse();
+                    }
                     Destroy(gameObject);
                     return;
                 }
