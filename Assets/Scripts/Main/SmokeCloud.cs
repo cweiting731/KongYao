@@ -88,5 +88,30 @@ namespace Main
 
             Destroy(gameObject, destroyDelay);
         }
+
+        public void RemoveImmediately()
+        {
+            if (particles == null || particles.Length == 0)
+            {
+                particles = GetComponentsInChildren<ParticleSystem>();
+            }
+
+            foreach (ParticleSystem particle in particles)
+            {
+                particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            }
+
+            if (renderers == null || renderers.Length == 0)
+            {
+                renderers = GetComponentsInChildren<Renderer>();
+            }
+
+            foreach (Renderer smokeRenderer in renderers)
+            {
+                smokeRenderer.enabled = false;
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

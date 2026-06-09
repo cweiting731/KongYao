@@ -96,13 +96,20 @@ namespace Main
 
             if (smokeCloud != null)
             {
-                // Do not automatically disperse smoke when fire is extinguished.
-                // Always detach smoke so it can linger for its lingeringLifeTime.
-                smokeCloud.transform.SetParent(null, true);
-                smokeCloud.DetachFromFire();
+                if (removeSmoke)
+                {
+                    smokeCloud.RemoveImmediately();
+                }
+                else
+                {
+                    // Do not automatically disperse smoke when fire is extinguished.
+                    // Always detach smoke so it can linger for its lingeringLifeTime.
+                    smokeCloud.transform.SetParent(null, true);
+                    smokeCloud.DetachFromFire();
+                }
             }
 
-            Destroy(gameObject, 1.5f);
+            Destroy(gameObject, removeSmoke ? 0f : 1.5f);
         }
 
         public void IntensifyFire()

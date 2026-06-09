@@ -696,8 +696,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 920657818315619146}
-        m_TargetAssemblyTypeName: Main.KilnBuilder, Assembly-CSharp
-        m_MethodName: GenerateKilnInFront
+        m_TargetAssemblyTypeName: Main.SweetPotatoSpawner, Assembly-CSharp
+        m_MethodName: SpawnSweetPotatoInFrontOfUser
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6223,7 +6223,7 @@ MonoBehaviour:
   MeshMaterial: {fileID: 2100000, guid: 1e5f7d26f68b50043b4e6808aec6d69b, type: 2}
   BarycentricCoordinatesEnabled: 0
   Colliders: 1
-  CutHoles: 0
+  CutHoles: 458750
   castShadows: 1
   hideMesh: 0
   Layer: 0
@@ -6781,6 +6781,67 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &348626077440880849
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4281125902006020439, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281125902006020439, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281125902006020439, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281125902006020439, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281125902006020439, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281125902006020439, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281125902006020439, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281125902006020439, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281125902006020439, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281125902006020439, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085595755349526432, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_Name
+      value: Sweet Potato
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085595755349526432, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
 --- !u!1 &456091117541687357
 GameObject:
   m_ObjectHideFlags: 0
@@ -7407,23 +7468,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 920657818315619145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b13e293a413124f849ff0cb00ea070, type: 3}
+  m_Script: {fileID: 11500000, guid: deb3bc28e14db5b47be60ac4ab920ebf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Main.KilnBuilder
-  brickPrefab: {fileID: 5856938607591454276, guid: 8814a3b87d14a8146b0af2130e2dbd40, type: 3}
-  woodPrefab: {fileID: 0}
-  firePrefab: {fileID: 0}
-  wallLayers: 6
-  innerRadius: 0.9
-  openingAngle: 60
-  capTop: 1
-  brickLength: 0.2
-  brickWidth: 0.1
-  brickHeight: 0.1
-  spawnDistanceInFront: 1
-  floorMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  m_EditorClassIdentifier: Assembly-CSharp::Main.SweetPotatoSpawner
+  sweetPotatoPrefab: {fileID: 8085595755349526432, guid: c29d4d232e9fcde499d7230c8c0ecf22, type: 3}
+  centerEyeAnchor: {fileID: 1431970611}
+  spawnDistance: 1
+  spawnHeight: 1
+  fallbackSweetPotatoScale: {x: 0.45, y: 0.22, z: 0.22}
 --- !u!1001 &951344332324190534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14150,3 +14202,4 @@ SceneRoots:
   - {fileID: 4079593788315533291}
   - {fileID: 8611594022420304055}
   - {fileID: 1167723790993521137}
+  - {fileID: 348626077440880849}

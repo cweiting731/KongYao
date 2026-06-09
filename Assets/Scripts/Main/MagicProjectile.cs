@@ -112,10 +112,19 @@ namespace Main
             FireSurface fireSurface = other.GetComponentInParent<FireSurface>();
             SmokeCloud smokeCloud = other.GetComponentInParent<SmokeCloud>();
 
-            if (magicType == MagicType.Water && fireSurface != null)
+            if (magicType == MagicType.Water && (fireSurface != null || smokeCloud != null))
             {
                 hasImpacted = true;
-                fireSurface.Extinguish();
+                if (fireSurface != null)
+                {
+                    fireSurface.Extinguish();
+                }
+
+                if (smokeCloud != null && fireSurface == null)
+                {
+                    smokeCloud.RemoveImmediately();
+                }
+
                 Destroy(gameObject);
                 return;
             }
@@ -199,6 +208,13 @@ namespace Main
                 if (fireSurface != null)
                 {
                     fireSurface.Extinguish();
+                    continue;
+                }
+
+                SmokeCloud smokeCloud = hitCollider.GetComponentInParent<SmokeCloud>();
+                if (smokeCloud != null)
+                {
+                    smokeCloud.RemoveImmediately();
                 }
             }
         }
