@@ -228,7 +228,7 @@ namespace Main
             {
                 brickObject = Instantiate(brickPrefab, spawnPosition, Random.rotation);
                 // Brick proportions L:W:H ~ 2:1:1, smaller overall
-                float baseSize = Random.Range(0.09f, 0.12f); // base unit
+                float baseSize = Random.Range(0.08f, 0.1f); // base unit
                 float length = baseSize * 2f; // 長度 (x)
                 float width = baseSize * 1f;  // 寬度 (z)
                 float height = baseSize * 1f; // 高度 (y)

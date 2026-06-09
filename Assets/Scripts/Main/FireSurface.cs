@@ -4,10 +4,10 @@ namespace Main
 {
     public class FireSurface : MonoBehaviour
     {
-        [SerializeField] private float triggerRadius = 0.45f;
-        [SerializeField] private float smokeLingeringLifeTime = 5f;
-        [SerializeField] private float mediumSmokeLingeringLifeTime = 10f;
-        [SerializeField] private float largeSmokeLingeringLifeTime = 15f;
+        [SerializeField] private float triggerRadius = 0.12f;
+        [SerializeField] private float smokeLingeringLifeTime = 10f;
+        [SerializeField] private float mediumSmokeLingeringLifeTime = 15f;
+        [SerializeField] private float largeSmokeLingeringLifeTime = 20f;
         [SerializeField] private float smallFireScale = 1f;
         [SerializeField] private float mediumFireScale = 1.6f;
         [SerializeField] private float largeFireScale = 2.4f;
@@ -102,14 +102,19 @@ namespace Main
                 }
                 else
                 {
-                    // Do not automatically disperse smoke when fire is extinguished.
-                    // Always detach smoke so it can linger for its lingeringLifeTime.
-                    smokeCloud.transform.SetParent(null, true);
-                    smokeCloud.DetachFromFire();
+                    // Keep smoke under this object so the parent trigger remains active
+                    // until the lingering smoke is destroyed.
+                    smokeCloud.DetachFromFire(gameObject);
                 }
             }
 
-            Destroy(gameObject, removeSmoke ? 0f : 1.5f);
+            if (removeSmoke || smokeCloud == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Destroy(this);
         }
 
         public void IntensifyFire()

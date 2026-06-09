@@ -11,6 +11,7 @@ namespace Main
         private ParticleSystem[] particles;
         private Renderer[] renderers;
         private FireSurface attachedFireSurface;
+        private GameObject ownerToDestroyWithSmoke;
         private bool dispersed;
 
         private void Awake()
@@ -49,7 +50,13 @@ namespace Main
 
         public void DetachFromFire()
         {
+            DetachFromFire(null);
+        }
+
+        public void DetachFromFire(GameObject ownerToDestroy)
+        {
             attachedFireSurface = null;
+            ownerToDestroyWithSmoke = ownerToDestroy;
             Destroy(gameObject, lingeringLifeTime);
         }
 
@@ -112,6 +119,14 @@ namespace Main
             }
 
             Destroy(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            if (ownerToDestroyWithSmoke != null)
+            {
+                Destroy(ownerToDestroyWithSmoke);
+            }
         }
     }
 }

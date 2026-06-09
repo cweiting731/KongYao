@@ -24,7 +24,7 @@ namespace Main
         [SerializeField] private Color burntColor = Color.black;
 
         private readonly HashSet<SmokeCloud> touchingSmokeClouds = new HashSet<SmokeCloud>();
-        private readonly MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
+        private MaterialPropertyBlock propertyBlock;
         private Renderer[] renderers;
         private Rigidbody rigidBody;
         private CookState cookState = CookState.Raw;
@@ -36,6 +36,8 @@ namespace Main
 
         private void Awake()
         {
+            propertyBlock = new MaterialPropertyBlock();
+
             renderers = GetComponentsInChildren<Renderer>();
             rigidBody = GetComponent<Rigidbody>();
             rigidBody.useGravity = true;
@@ -114,17 +116,37 @@ namespace Main
                 return;
             }
 
-            SmokeCloud smokeCloud = other.GetComponentInParent<SmokeCloud>();
-            if (smokeCloud != null)
+            FireSurface fireSurface = other.GetComponent<FireSurface>();
+            if (fireSurface != null)
             {
-                touchingSmokeClouds.Add(smokeCloud);
+                Debug.Log($"[SweetPotato] Touched fire surface '{fireSurface.name}' and got burnt.", this);
+                Burn();
                 return;
             }
 
-            if (other.GetComponentInParent<FireSurface>() != null)
+            SmokeCloud smokeCloud = GetComponentInSelfOrFirstChild<SmokeCloud>(other.gameObject);
+            if (smokeCloud != null)
             {
-                Burn();
+                touchingSmokeClouds.Add(smokeCloud);
+                Debug.Log($"[SweetPotato] Touching smoke cloud for {smokeTouchSeconds:0.0}s.", this);
+                return;
             }
+        }
+
+        private T GetComponentInSelfOrFirstChild<T>(GameObject target) where T : Component
+        {
+            // 先檢查物件本身有沒有該組件
+            T component = target.GetComponent<T>();
+            if (component != null) return component;
+
+            // 只遍歷第一層的子節點 (transform 的 foreach 預設只會走訪直接子物件，不會遞迴進去)
+            foreach (Transform child in target.transform)
+            {
+                component = child.GetComponent<T>();
+                if (component != null) return component;
+            }
+
+            return null; // 都沒找到則回傳 null
         }
 
         private void Cook()
